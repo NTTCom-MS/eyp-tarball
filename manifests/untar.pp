@@ -51,6 +51,7 @@ define tarball::untar (
       command => "wget ${source_url} -O ${srcdir}/${packagename}.${filetype}",
       creates => "${srcdir}/${packagename}.${filetype}",
       require => Exec[ [ "mkdir ${srcdir} ${packagename}", "which wget ${packagename}" ] ],
+      notify  => Exec["extract ${filetype} ${packagename}"],
     }
 
     file { "${srcdir}/${packagename}.${filetype}":
@@ -59,7 +60,7 @@ define tarball::untar (
       group   => 'root',
       mode    => '0644',
       require => Exec["wget ${source_url}"],
-      notify  => Exec["extract ${filetype} ${packagename}"],
+      before  => Exec["extract ${filetype} ${packagename}"],
     }
   }
 
