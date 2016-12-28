@@ -5,6 +5,8 @@ define tarball::untar (
                         $srcdir      = '/usr/local/src',
                         $source_url  = undef,
                         $source      = undef,
+                        $ln_from     = undef,
+                        $ln_to       = undef,
                       ) {
 
   Exec {
@@ -87,6 +89,14 @@ define tarball::untar (
     default:
     {
       fail("unsupported filetype: ${filetype}")
+    }
+  }
+
+  if($ln_from!=undef)
+  {
+    file { $ln_to:
+      ensure => 'link',
+      target => "${basedir}/${packagename}/${ln_from}",
     }
   }
 
