@@ -23,6 +23,9 @@ class tarball::params {
             /^14.*$/:
             {
             }
+            /^16.*$/:
+            {
+            }
             default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
         }
