@@ -5,8 +5,8 @@ define tarball::untar (
                         $srcdir      = '/usr/local/src',
                         $source_url  = undef,
                         $source      = undef,
-                        $ln_from     = undef,
-                        $ln_to       = undef,
+                        $ln          = undef,
+                        $ln_file     = undef,
                       ) {
 
   Exec {
@@ -92,11 +92,12 @@ define tarball::untar (
     }
   }
 
-  if($ln_from!=undef)
+  if($ln!=undef)
   {
-    file { $ln_to:
-      ensure => 'link',
-      target => "${basedir}/${packagename}/${ln_from}",
+    file { $ln:
+      ensure  => 'link',
+      target  => "${basedir}/${packagename}/${ln_file}",
+      require => Exec["extract ${filetype} ${packagename}"],
     }
   }
 

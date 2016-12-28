@@ -42,15 +42,19 @@ management, etc.) this is the time to mention it.
 
 ### Setup Requirements
 
-This module requires pluginsync enabled 
+This module requires pluginsync enabled
 
 ### Beginning with tarball
 
-The very basic steps needed for a user to get the module up and running.
+puppet bucket:
 
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+```puppet
+tarball::untar { 'tomcat':
+  source  => 'puppet:///solr/apache-tomcat-7.0.62.tar.gz',
+  ln      => '/tomcat',
+  ln_file => 'apache-tomcat-7.0.62',
+}
+```
 
 ## Usage
 
