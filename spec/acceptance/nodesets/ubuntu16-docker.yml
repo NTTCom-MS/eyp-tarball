@@ -6,6 +6,7 @@ HOSTS:
     platform: ubuntu-16.04-amd64
     hypervisor : docker
     image: ubuntu:16.04
+    docker_cmd: '["/sbin/init"]'
     docker_preserve_image: true
     docker_image_commands:
       - 'apt-get install gcc make tar wget openjdk-7-jdk openjdk-7-jre -y'
