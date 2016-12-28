@@ -2,7 +2,7 @@
   "name": "eyp-tarball",
   "version": "0.1.0",
   "author": "eyp",
-  "summary": null,
+  "summary": "tarball deployment",
   "license": "Apache-2.0",
   "source": "https://github.com/NTTCom-MS/eyp-tarball",
   "project_page": null,
