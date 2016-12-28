@@ -56,6 +56,16 @@ tarball::untar { 'tomcat':
 }
 ```
 
+URL:
+
+```puppet
+tarball::untar { 'tomcat8':
+  source_url  => 'http://apache.uvigo.es/tomcat/tomcat-8/v8.5.9/bin/apache-tomcat-8.5.9.tar.gz',
+  ln          => '/tomcat8',
+  ln_file     => 'apache-tomcat-8.5.9',
+}
+```
+
 ## Usage
 
 Put the classes, types, and resources for customizing, configuring, and doing
