@@ -37,7 +37,7 @@ define tarball::untar (
       ensure  => 'present',
       owner   => 'root',
       group   => 'root',
-      mode    => '0655',
+      mode    => '0644',
       source  => $source,
       require => Exec["mkdir ${srcdir} ${packagename}"],
       notify  => Exec["extract ${filetype} ${packagename}"],
@@ -55,7 +55,7 @@ define tarball::untar (
       ensure  => 'present',
       owner   => 'root',
       group   => 'root',
-      mode    => '0655',
+      mode    => '0644',
       require => Exec["wget ${source_url}"],
       notify  => Exec["extract ${filetype} ${packagename}"],
     }
@@ -77,7 +77,7 @@ define tarball::untar (
 
       exec { "extract ${filetype} ${packagename}":
         command     => "tar xf ${srcdir}/${packagename}.${filetype} -C ${basedir}/${packagename}",
-        refreshonly => true
+        refreshonly => true,
         require     => [
                           Exec[ [ "mkdir ${basedir} ${packagename}", "which tar ${packagename}" ] ],
                           File["${srcdir}/${packagename}.${filetype}"]
