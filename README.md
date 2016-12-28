@@ -17,32 +17,23 @@
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+tar.gz deployment
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+This module allows you to manage .tar.gz file deployments
 
 ## Setup
 
 ### What tarball affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+* extracts a given file to a directory
 
 ### Setup Requirements
 
-This module requires pluginsync enabled
+This module requires pluginsync enabled and the following binaries in your system:
+* wget (to download files using **source_url**)
+* tar (to be able to extract tar files)
 
 ### Beginning with tarball
 
@@ -68,15 +59,30 @@ tarball::untar { 'tomcat8':
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+```puppet
+tarball::untar { 'example':
+  basedir     => '/opt',
+  filetype    => 'tar',
+  srcdir      => '/usr/local/src',
+  source_url  => 'http://apache.uvigo.es/tomcat/tomcat-8/v8.5.9/bin/apache-tomcat-8.5.9.tar.gz',
+  ln          => '/tomcat8',
+  ln_file     => 'apache-tomcat-8.5.9',
+}
+```
+
+This will download using wget from **source_url** to a file called **srcdir**/**packagename**.**filetype** and extract it to **basedir**/**packagename**. Once extracted, it will create a link on **ln** pointing to **basedir**/**packagename**/**ln_file**
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+### tarball::untar
+ * **basedir**: Where to deploy this file (default: /opt)
+ * **packagename**: Package name (default: $name)
+ * **filetype**: File type, currently only tar is supported (default: tar)
+ * **srcdir**: Where to store the downloaded file (default: /usr/local/src)
+ * **source_url**: Download using a URL (default: undef)
+ * **source**: Extract using a puppet bucket (default: undef)
+ * **ln**: Optionally, create a softlink (default: undef)
+ * **ln_file**: Softlink's target (default: undef, softlink target will be **basedir**/**packagename**)
 
 ## Limitations
 
@@ -89,7 +95,7 @@ have some test to check both presence and absence of any feature
 
 ### TODO
 
-TODO list
+* zip support
 
 ### Contributing
 
