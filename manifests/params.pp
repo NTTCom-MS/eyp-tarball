@@ -1,8 +1,5 @@
 class tarball::params {
 
-  $package_name='tarball'
-  $service_name='tarball'
-
   case $::osfamily
   {
     'redhat':
