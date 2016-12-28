@@ -69,7 +69,7 @@ define tarball::untar (
     'tar':
     {
       exec { "which tar ${packagename}":
-        command => "which tar",
+        command => 'which tar',
         unless  => 'which tar',
       }
 
